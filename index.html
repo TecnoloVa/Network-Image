@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rede Integrada de Saúde Digital de Angola - Ecossistema com AI</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Space Grotesk', sans-serif;
+      background: linear-gradient(135deg, #0F172A 0%, #1E293B 50%, #0F172A 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    
+    .network-container {
+      width: 1800px;
+      height: 1050px;
+      background: linear-gradient(180deg, rgba(15,23,42,0.98) 0%, rgba(30,41,59,0.95) 100%);
+      border-radius: 24px;
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      box-shadow: 
+        0 0 100px rgba(56, 189, 248, 0.15),
+        0 25px 50px rgba(0,0,0,0.5);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .network-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #0EA5E9, #10B981, #8B5CF6, #0EA5E9);
+      background-size: 300% 100%;
+    }
+    
+    .header {
+      text-align: center;
+      padding: 25px 0 15px;
+    }
+    
+    .header h1 {
+      font-size: 32px;
+      font-weight: 700;
+      background: linear-gradient(135deg, #FFFFFF 0%, #94A3B8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: -0.5px;
+    }
+    
+    .header .subtitle {
+      color: #64748B;
+      font-size: 14px;
+      font-weight: 400;
+      margin-top: 6px;
+      font-family: 'Inter', sans-serif;
+    }
+    
+    .network-svg {
+      width: 100%;
+      height: calc(100% - 90px);
+    }
+    
+    /* Connection Lines Animation */
+    .connection {
+      stroke-dasharray: 8, 4;
+      animation: dash 20s linear infinite;
+    }
+    
+    @keyframes dash {
+      to {
+        stroke-dashoffset: -100;
+      }
+    }
+    
+    .connection-flow {
+      animation: flow 3s ease-in-out infinite;
+    }
+    
+    @keyframes flow {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 1; }
+    }
+    
+    .pulse {
+      animation: pulse 2s ease-in-out infinite;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { opacity: 0.6; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.05); }
+    }
+    
+    /* Legend */
+    .legend {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 24px;
+      background: rgba(15, 23, 42, 0.9);
+      padding: 10px 20px;
+      border-radius: 10px;
+      border: 1px solid rgba(148, 163, 184, 0.2);
+    }
+    
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #94A3B8;
+      font-size: 11px;
+      font-family: 'Inter', sans-serif;
+    }
+    
+    .legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+    
+    .powered-by {
+      position: absolute;
+      bottom: 20px;
+      right: 25px;
+      color: #475569;
+      font-size: 10px;
+      font-family: 'Inter', sans-serif;
+    }
+    
+    .powered-by span {
+      color: #0EA5E9;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <div class="network-container">
+    <div class="header">
+      <h1>Ecossistema Médico com AI</h1>
+      <p class="subtitle">Rede Integrada de Saúde Digital de Angola</p>
+    </div>
+    
+    <svg class="network-svg" viewBox="0 0 1800 930">
+      <!-- Background Grid -->
+      <defs>
+        <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+          <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(100,116,139,0.06)" stroke-width="1"/>
+        </pattern>
+        
+        <!-- Gradients -->
+        <linearGradient id="gradCentral" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#0EA5E9"/>
+          <stop offset="100%" style="stop-color:#0284C7"/>
+        </linearGradient>
+        
+        <linearGradient id="gradPharmacy" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#10B981"/>
+          <stop offset="100%" style="stop-color:#059669"/>
+        </linearGradient>
+        
+        <linearGradient id="gradLab" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#8B5CF6"/>
+          <stop offset="100%" style="stop-color:#7C3AED"/>
+        </linearGradient>
+        
+        <linearGradient id="gradServer" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#EC4899"/>
+          <stop offset="100%" style="stop-color:#DB2777"/>
+        </linearGradient>
+
+        <linearGradient id="gradPatient" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#FB923C"/>
+          <stop offset="100%" style="stop-color:#EA580C"/>
+        </linearGradient>
+
+        <linearGradient id="gradHospital" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#F472B6"/>
+          <stop offset="100%" style="stop-color:#EC4899"/>
+        </linearGradient>
+
+        <linearGradient id="gradDoctor" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#60A5FA"/>
+          <stop offset="100%" style="stop-color:#3B82F6"/>
+        </linearGradient>
+      </defs>
+      
+      <rect width="100%" height="100%" fill="url(#grid)"/>
+      
+      <!-- ==================== CONNECTION LINES ==================== -->
+      
+      <!-- Central Server to AngoMedi -->
+      <line x1="900" y1="430" x2="900" y2="240" stroke="rgba(236,72,153,0.5)" stroke-width="3" class="connection"/>
+      
+      <!-- AngoMedi to AngoFarmacias -->
+      <path d="M 750 180 Q 470 200 370 300" fill="none" stroke="rgba(16,185,129,0.5)" stroke-width="2.5" class="connection"/>
+      
+      <!-- AngoMedi to AngoLabs -->
+      <path d="M 1050 180 Q 1330 200 1430 300" fill="none" stroke="rgba(139,92,246,0.5)" stroke-width="2.5" class="connection"/>
+      
+      <!-- AngoFarmacias to Vida+ -->
+      <line x1="370" y1="400" x2="370" y2="520" stroke="rgba(16,185,129,0.4)" stroke-width="2" class="connection"/>
+      
+      <!-- AngoLabs to Lab+ -->
+      <line x1="1430" y1="400" x2="1430" y2="520" stroke="rgba(139,92,246,0.4)" stroke-width="2" class="connection"/>
+      
+      <!-- Backend to AngoFarmacias -->
+      <path d="M 820 450 Q 570 450 430 380" fill="none" stroke="rgba(16,185,129,0.4)" stroke-width="2" class="connection"/>
+      
+      <!-- Backend to AngoLabs -->
+      <path d="M 980 450 Q 1230 450 1370 380" fill="none" stroke="rgba(139,92,246,0.4)" stroke-width="2" class="connection"/>
+      
+      <!-- User connections to AngoMedi -->
+      <line x1="800" y1="200" x2="550" y2="720" stroke="rgba(251,146,60,0.3)" stroke-width="2" class="connection"/>
+      <line x1="900" y1="200" x2="900" y2="720" stroke="rgba(244,114,182,0.3)" stroke-width="2" class="connection"/>
+      <line x1="1000" y1="200" x2="1250" y2="720" stroke="rgba(96,165,250,0.3)" stroke-width="2" class="connection"/>
+      
+      <!-- Pharmacy connections to Pharmacies - EVEN MORE LEFT -->
+      <line x1="290" y1="350" x2="60" y2="520" stroke="rgba(16,185,129,0.3)" stroke-width="1.5" class="connection"/>
+      
+      <!-- Labs connections to Labs - EVEN MORE RIGHT -->
+      <line x1="1510" y1="350" x2="1740" y2="520" stroke="rgba(139,92,246,0.3)" stroke-width="1.5" class="connection"/>
+      
+      <!-- ==================== DATA FLOW LABELS ==================== -->
+      
+      <!-- AngoMedi to AngoFarmacias Label -->
+      <g transform="translate(470, 210)">
+        <rect x="0" y="0" width="160" height="50" rx="6" fill="rgba(16,185,129,0.15)" stroke="rgba(16,185,129,0.3)" stroke-width="1"/>
+        <text x="80" y="14" text-anchor="middle" fill="#10B981" font-size="8" font-weight="600">PRESCRIÇÕES DIGITAIS</text>
+        <text x="80" y="26" text-anchor="middle" fill="#6EE7B7" font-size="7">Pedidos de Medicamentos</text>
+        <text x="80" y="37" text-anchor="middle" fill="#6EE7B7" font-size="7">Verificação de Stock</text>
+        <text x="80" y="48" text-anchor="middle" fill="#6EE7B7" font-size="7">Notificações de Entrega</text>
+      </g>
+      
+      <!-- AngoMedi to AngoLabs Label -->
+      <g transform="translate(1170, 210)">
+        <rect x="0" y="0" width="160" height="50" rx="6" fill="rgba(139,92,246,0.15)" stroke="rgba(139,92,246,0.3)" stroke-width="1"/>
+        <text x="80" y="14" text-anchor="middle" fill="#8B5CF6" font-size="8" font-weight="600">PEDIDOS DE EXAMES</text>
+        <text x="80" y="26" text-anchor="middle" fill="#C4B5FD" font-size="7">Resultados Laboratoriais</text>
+        <text x="80" y="37" text-anchor="middle" fill="#C4B5FD" font-size="7">Histórico de Análises</text>
+        <text x="80" y="48" text-anchor="middle" fill="#C4B5FD" font-size="7">Alertas de Resultados</text>
+      </g>
+      
+      <!-- Backend to Systems Label -->
+      <g transform="translate(830, 500)">
+        <rect x="0" y="0" width="140" height="35" rx="5" fill="rgba(236,72,153,0.15)" stroke="rgba(236,72,153,0.3)" stroke-width="1"/>
+        <text x="70" y="14" text-anchor="middle" fill="#EC4899" font-size="8" font-weight="600">API GraphQL</text>
+        <text x="70" y="26" text-anchor="middle" fill="#F9A8D4" font-size="7">Sincronização em Tempo Real</text>
+      </g>
+      
+      <!-- ==================== CENTRAL SERVER NODE ==================== -->
+      <g transform="translate(900, 450)">
+        <circle r="55" fill="url(#gradServer)" opacity="0.2"/>
+        <circle r="45" fill="url(#gradServer)"/>
+        <text y="-5" text-anchor="middle" fill="white" font-size="13" font-weight="600">Backend</text>
+        <text y="10" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-size="9">PostgreSQL</text>
+        <text y="22" text-anchor="middle" fill="rgba(255,255,255,0.6)" font-size="8">+ Prisma ORM</text>
+      </g>
+      
+      <!-- ==================== ANGOMEDI CENTRAL NODE ==================== -->
+      <g transform="translate(900, 160)">
+        <rect x="-110" y="-55" width="220" height="110" rx="18" fill="url(#gradCentral)" opacity="0.15"/>
+        <rect x="-100" y="-45" width="200" height="90" rx="14" fill="url(#gradCentral)"/>
+        <text y="-15" text-anchor="middle" fill="white" font-size="22" font-weight="700">AngoMedi</text>
+        <text y="5" text-anchor="middle" fill="rgba(255,255,255,0.9)" font-size="11">App Móvel & Website</text>
+        <text y="22" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="9">Modo Paciente | Hospital | Médico</text>
+      </g>
+      
+      <!-- AngoMedi Features Left -->
+      <g transform="translate(660, 280)">
+        <rect x="0" y="0" width="110" height="24" rx="5" fill="rgba(14,165,233,0.2)" stroke="rgba(14,165,233,0.4)" stroke-width="1"/>
+        <text x="55" y="16" text-anchor="middle" fill="#38BDF8" font-size="9">🤖 Chat IA 24/7</text>
+      </g>
+      <g transform="translate(660, 310)">
+        <rect x="0" y="0" width="110" height="24" rx="5" fill="rgba(14,165,233,0.2)" stroke="rgba(14,165,233,0.4)" stroke-width="1"/>
+        <text x="55" y="16" text-anchor="middle" fill="#38BDF8" font-size="9">📅 Agendamentos</text>
+      </g>
+      <g transform="translate(660, 340)">
+        <rect x="0" y="0" width="110" height="24" rx="5" fill="rgba(14,165,233,0.2)" stroke="rgba(14,165,233,0.4)" stroke-width="1"/>
+        <text x="55" y="16" text-anchor="middle" fill="#38BDF8" font-size="9">💬 Teleconsultas</text>
+      </g>
+      <!-- AngoMedi Features Right -->
+      <g transform="translate(1030, 280)">
+        <rect x="0" y="0" width="110" height="24" rx="5" fill="rgba(14,165,233,0.2)" stroke="rgba(14,165,233,0.4)" stroke-width="1"/>
+        <text x="55" y="16" text-anchor="middle" fill="#38BDF8" font-size="9">📋 Histórico Médico</text>
+      </g>
+      <g transform="translate(1030, 310)">
+        <rect x="0" y="0" width="110" height="24" rx="5" fill="rgba(14,165,233,0.2)" stroke="rgba(14,165,233,0.4)" stroke-width="1"/>
+        <text x="55" y="16" text-anchor="middle" fill="#38BDF8" font-size="9">💊 Prescrições</text>
+      </g>
+      <g transform="translate(1030, 340)">
+        <rect x="0" y="0" width="110" height="24" rx="5" fill="rgba(14,165,233,0.2)" stroke="rgba(14,165,233,0.4)" stroke-width="1"/>
+        <text x="55" y="16" text-anchor="middle" fill="#38BDF8" font-size="9">🩺 Registos Saúde</text>
+      </g>
+      
+      <!-- ==================== ANGOFARMÁCIAS NODE ==================== -->
+      <g transform="translate(370, 350)">
+        <rect x="-100" y="-50" width="200" height="100" rx="16" fill="url(#gradPharmacy)" opacity="0.15"/>
+        <rect x="-90" y="-40" width="180" height="80" rx="12" fill="url(#gradPharmacy)"/>
+        <text y="-10" text-anchor="middle" fill="white" font-size="18" font-weight="700">AngoFarmácias</text>
+        <text y="10" text-anchor="middle" fill="rgba(255,255,255,0.9)" font-size="10">Gestão de Farmácias</text>
+        <text y="25" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="8">Web & Mobile</text>
+      </g>
+      
+      <!-- AngoFarmacias Features -->
+      <g transform="translate(130, 260)">
+        <rect x="0" y="0" width="130" height="22" rx="5" fill="rgba(16,185,129,0.2)" stroke="rgba(16,185,129,0.4)" stroke-width="1"/>
+        <text x="65" y="15" text-anchor="middle" fill="#34D399" font-size="8">📦 Gestão de Inventário</text>
+      </g>
+      <g transform="translate(130, 288)">
+        <rect x="0" y="0" width="130" height="22" rx="5" fill="rgba(16,185,129,0.2)" stroke="rgba(16,185,129,0.4)" stroke-width="1"/>
+        <text x="65" y="15" text-anchor="middle" fill="#34D399" font-size="8">💊 Prescrições Digitais</text>
+      </g>
+      <g transform="translate(130, 316)">
+        <rect x="0" y="0" width="130" height="22" rx="5" fill="rgba(16,185,129,0.2)" stroke="rgba(16,185,129,0.4)" stroke-width="1"/>
+        <text x="65" y="15" text-anchor="middle" fill="#34D399" font-size="8">🛒 Pedidos & Entregas</text>
+      </g>
+      <g transform="translate(130, 344)">
+        <rect x="0" y="0" width="130" height="22" rx="5" fill="rgba(16,185,129,0.2)" stroke="rgba(16,185,129,0.4)" stroke-width="1"/>
+        <text x="65" y="15" text-anchor="middle" fill="#34D399" font-size="8">📊 Análise de Vendas</text>
+      </g>
+      <g transform="translate(130, 372)">
+        <rect x="0" y="0" width="130" height="22" rx="5" fill="rgba(16,185,129,0.2)" stroke="rgba(16,185,129,0.4)" stroke-width="1"/>
+        <text x="65" y="15" text-anchor="middle" fill="#34D399" font-size="8">📱 Scanner QR Code</text>
+      </g>
+      <g transform="translate(130, 400)">
+        <rect x="0" y="0" width="130" height="22" rx="5" fill="rgba(16,185,129,0.2)" stroke="rgba(16,185,129,0.4)" stroke-width="1"/>
+        <text x="65" y="15" text-anchor="middle" fill="#34D399" font-size="8">👥 Gestão de Equipa</text>
+      </g>
+      
+      <!-- ==================== VIDA+ NODE ==================== -->
+      <g transform="translate(370, 580)">
+        <rect x="-85" y="-40" width="170" height="80" rx="14" fill="url(#gradPharmacy)" opacity="0.15"/>
+        <rect x="-75" y="-30" width="150" height="60" rx="10" fill="url(#gradPharmacy)"/>
+        <text y="-5" text-anchor="middle" fill="white" font-size="16" font-weight="600">Vida+</text>
+        <text y="12" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-size="9">Farmácia Online</text>
+        <text y="25" text-anchor="middle" fill="rgba(255,255,255,0.6)" font-size="7">7.000+ Produtos</text>
+      </g>
+      
+      <!-- Vida+ Features - MOVED TO THE LEFT -->
+      <g transform="translate(130, 540)">
+        <rect x="0" y="0" width="95" height="18" rx="4" fill="rgba(16,185,129,0.15)"/>
+        <text x="47" y="13" text-anchor="middle" fill="#6EE7B7" font-size="7">💊 Medicamentos</text>
+      </g>
+      <g transform="translate(130, 562)">
+        <rect x="0" y="0" width="95" height="18" rx="4" fill="rgba(16,185,129,0.15)"/>
+        <text x="47" y="13" text-anchor="middle" fill="#6EE7B7" font-size="7">🌿 Suplementos</text>
+      </g>
+      <g transform="translate(130, 584)">
+        <rect x="0" y="0" width="95" height="18" rx="4" fill="rgba(16,185,129,0.15)"/>
+        <text x="47" y="13" text-anchor="middle" fill="#6EE7B7" font-size="7">🚚 Entrega em 2h</text>
+      </g>
+      <g transform="translate(130, 606)">
+        <rect x="0" y="0" width="95" height="18" rx="4" fill="rgba(16,185,129,0.15)"/>
+        <text x="47" y="13" text-anchor="middle" fill="#6EE7B7" font-size="7">✅ Produtos Verificados</text>
+      </g>
+      
+      <!-- ==================== ANGOLABS NODE ==================== -->
+      <g transform="translate(1430, 350)">
+        <rect x="-100" y="-50" width="200" height="100" rx="16" fill="url(#gradLab)" opacity="0.15"/>
+        <rect x="-90" y="-40" width="180" height="80" rx="12" fill="url(#gradLab)"/>
+        <text y="-10" text-anchor="middle" fill="white" font-size="18" font-weight="700">AngoLabs</text>
+        <text y="10" text-anchor="middle" fill="rgba(255,255,255,0.9)" font-size="10">Gestão de Laboratórios</text>
+        <text y="25" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="8">Web & Mobile</text>
+      </g>
+      
+      <!-- AngoLabs Features -->
+      <g transform="translate(1540, 260)">
+        <rect x="0" y="0" width="130" height="22" rx="5" fill="rgba(139,92,246,0.2)" stroke="rgba(139,92,246,0.4)" stroke-width="1"/>
+        <text x="65" y="15" text-anchor="middle" fill="#A78BFA" font-size="8">🧪 Pedidos de Exames</text>
+      </g>
+      <g transform="translate(1540, 288)">
+        <rect x="0" y="0" width="130" height="22" rx="5" fill="rgba(139,92,246,0.2)" stroke="rgba(139,92,246,0.4)" stroke-width="1"/>
+        <text x="65" y="15" text-anchor="middle" fill="#A78BFA" font-size="8">📋 Gestão de Resultados</text>
+      </g>
+      <g transform="translate(1540, 316)">
+        <rect x="0" y="0" width="130" height="22" rx="5" fill="rgba(139,92,246,0.2)" stroke="rgba(139,92,246,0.4)" stroke-width="1"/>
+        <text x="65" y="15" text-anchor="middle" fill="#A78BFA" font-size="8">👥 Registos de Pacientes</text>
+      </g>
+      <g transform="translate(1540, 344)">
+        <rect x="0" y="0" width="130" height="22" rx="5" fill="rgba(139,92,246,0.2)" stroke="rgba(139,92,246,0.4)" stroke-width="1"/>
+        <text x="65" y="15" text-anchor="middle" fill="#A78BFA" font-size="8">🔬 Equipamento Lab</text>
+      </g>
+      <g transform="translate(1540, 372)">
+        <rect x="0" y="0" width="130" height="22" rx="5" fill="rgba(139,92,246,0.2)" stroke="rgba(139,92,246,0.4)" stroke-width="1"/>
+        <text x="65" y="15" text-anchor="middle" fill="#A78BFA" font-size="8">📊 Relatórios & Analytics</text>
+      </g>
+      <g transform="translate(1540, 400)">
+        <rect x="0" y="0" width="130" height="22" rx="5" fill="rgba(139,92,246,0.2)" stroke="rgba(139,92,246,0.4)" stroke-width="1"/>
+        <text x="65" y="15" text-anchor="middle" fill="#A78BFA" font-size="8">👥 Gestão de Equipa</text>
+      </g>
+      
+      <!-- ==================== LAB+ NODE ==================== -->
+      <g transform="translate(1430, 580)">
+        <rect x="-85" y="-40" width="170" height="80" rx="14" fill="url(#gradLab)" opacity="0.15"/>
+        <rect x="-75" y="-30" width="150" height="60" rx="10" fill="url(#gradLab)"/>
+        <text y="-5" text-anchor="middle" fill="white" font-size="16" font-weight="600">Lab+</text>
+        <text y="12" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-size="9">Serviços Laboratoriais</text>
+        <text y="25" text-anchor="middle" fill="rgba(255,255,255,0.6)" font-size="7">600+ Testes</text>
+      </g>
+      
+      <!-- Lab+ Features - MOVED TO THE RIGHT -->
+      <g transform="translate(1575, 540)">
+        <rect x="0" y="0" width="100" height="18" rx="4" fill="rgba(139,92,246,0.15)"/>
+        <text x="50" y="13" text-anchor="middle" fill="#C4B5FD" font-size="7">🩸 Análises Clínicas</text>
+      </g>
+      <g transform="translate(1575, 562)">
+        <rect x="0" y="0" width="100" height="18" rx="4" fill="rgba(139,92,246,0.15)"/>
+        <text x="50" y="13" text-anchor="middle" fill="#C4B5FD" font-size="7">🧬 Genética & DNA</text>
+      </g>
+      <g transform="translate(1575, 584)">
+        <rect x="0" y="0" width="100" height="18" rx="4" fill="rgba(139,92,246,0.15)"/>
+        <text x="50" y="13" text-anchor="middle" fill="#C4B5FD" font-size="7">⚡ Resultados 24h</text>
+      </g>
+      <g transform="translate(1575, 606)">
+        <rect x="0" y="0" width="100" height="18" rx="4" fill="rgba(139,92,246,0.15)"/>
+        <text x="50" y="13" text-anchor="middle" fill="#C4B5FD" font-size="7">📱 Resultados Online</text>
+      </g>
+      
+      <!-- ==================== PHARMACY ENTITY - EVEN MORE LEFT ==================== -->
+      <g transform="translate(60, 580)">
+        <rect x="-50" y="-35" width="100" height="70" rx="10" fill="rgba(16,185,129,0.1)" stroke="rgba(16,185,129,0.3)" stroke-width="1"/>
+        <!-- Pharmacy Building Icon -->
+        <svg x="-20" y="-25" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="1.5">
+          <path d="M3 21h18"/>
+          <path d="M5 21V7l8-4v18"/>
+          <path d="M19 21V11l-6-4"/>
+          <path d="M9 9v.01"/>
+          <path d="M9 12v.01"/>
+          <path d="M9 15v.01"/>
+          <path d="M9 18v.01"/>
+          <!-- Cross symbol for pharmacy -->
+          <rect x="7" y="10" width="4" height="1" fill="#10B981"/>
+          <rect x="8.5" y="8.5" width="1" height="4" fill="#10B981"/>
+        </svg>
+        <text y="25" text-anchor="middle" fill="#34D399" font-size="9" font-weight="500">Farmácias</text>
+        <text y="32" text-anchor="middle" fill="#94A3B8" font-size="8">10M+ Farmácias</text>
+      </g>
+      
+      <!-- ==================== LAB ENTITY - EVEN MORE RIGHT ==================== -->
+      <g transform="translate(1740, 580)">
+        <rect x="-50" y="-35" width="100" height="70" rx="10" fill="rgba(139,92,246,0.1)" stroke="rgba(139,92,246,0.3)" stroke-width="1"/>
+        <!-- Lab Building Icon -->
+        <svg x="-20" y="-25" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#8B5CF6" stroke-width="1.5">
+          <path d="M9 3h6v2H9z"/>
+          <path d="M10 5v4l-4 8h12l-4-8V5"/>
+          <path d="M8 17h8"/>
+          <circle cx="10" cy="14" r="1" fill="#8B5CF6"/>
+          <circle cx="14" cy="13" r="1" fill="#8B5CF6"/>
+          <circle cx="12" cy="15" r="1" fill="#8B5CF6"/>
+        </svg>
+        <text y="25" text-anchor="middle" fill="#A78BFA" font-size="9" font-weight="500">Laboratórios</text>
+        <text y="32" text-anchor="middle" fill="#94A3B8" font-size="8">10M+ Laboratórios</text>
+      </g>
+      
+      <!-- ==================== USER TYPE NODES ==================== -->
+      
+      <!-- Patient Node -->
+      <g transform="translate(550, 780)">
+        <!-- Patient Icon - Person silhouette -->
+        <svg x="-28" y="-55" width="56" height="56" viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="8" r="4" fill="url(#gradPatient)"/>
+          <path d="M4 20c0-4 4-6 8-6s8 2 8 6" fill="url(#gradPatient)"/>
+        </svg>
+        <text y="18" text-anchor="middle" fill="#FB923C" font-size="12" font-weight="600">Pacientes</text>
+        <text y="32" text-anchor="middle" fill="#94A3B8" font-size="8">100M+ Utilizadores</text>
+      </g>
+      
+      <!-- Patient Features - EXPANDED -->
+      <g transform="translate(380, 650)">
+        <rect x="0" y="0" width="105" height="18" rx="4" fill="rgba(251,146,60,0.15)"/>
+        <text x="52" y="12" text-anchor="middle" fill="#FDBA74" font-size="7">🤖 Assistente IA 24/7</text>
+      </g>
+      <g transform="translate(380, 672)">
+        <rect x="0" y="0" width="105" height="18" rx="4" fill="rgba(251,146,60,0.15)"/>
+        <text x="52" y="12" text-anchor="middle" fill="#FDBA74" font-size="7">📅 Marcar Consultas</text>
+      </g>
+      <g transform="translate(380, 694)">
+        <rect x="0" y="0" width="105" height="18" rx="4" fill="rgba(251,146,60,0.15)"/>
+        <text x="52" y="12" text-anchor="middle" fill="#FDBA74" font-size="7">💊 Ver Prescrições</text>
+      </g>
+      <g transform="translate(380, 716)">
+        <rect x="0" y="0" width="105" height="18" rx="4" fill="rgba(251,146,60,0.15)"/>
+        <text x="52" y="12" text-anchor="middle" fill="#FDBA74" font-size="7">🩺 Resultados Exames</text>
+      </g>
+      <g transform="translate(495, 650)">
+        <rect x="0" y="0" width="105" height="18" rx="4" fill="rgba(251,146,60,0.15)"/>
+        <text x="52" y="12" text-anchor="middle" fill="#FDBA74" font-size="7">📋 Histórico Médico</text>
+      </g>
+      <g transform="translate(495, 672)">
+        <rect x="0" y="0" width="105" height="18" rx="4" fill="rgba(251,146,60,0.15)"/>
+        <text x="52" y="12" text-anchor="middle" fill="#FDBA74" font-size="7">💬 Mensagens Médicos</text>
+      </g>
+      <g transform="translate(495, 694)">
+        <rect x="0" y="0" width="105" height="18" rx="4" fill="rgba(251,146,60,0.15)"/>
+        <text x="52" y="12" text-anchor="middle" fill="#FDBA74" font-size="7">🏥 Msg Hospitais</text>
+      </g>
+      <g transform="translate(495, 716)">
+        <rect x="0" y="0" width="105" height="18" rx="4" fill="rgba(251,146,60,0.15)"/>
+        <text x="52" y="12" text-anchor="middle" fill="#FDBA74" font-size="7">💉 Imunizações</text>
+      </g>
+      <g transform="translate(610, 650)">
+        <rect x="0" y="0" width="105" height="18" rx="4" fill="rgba(251,146,60,0.15)"/>
+        <text x="52" y="12" text-anchor="middle" fill="#FDBA74" font-size="7">🏦 Seguros de Saúde</text>
+      </g>
+      <g transform="translate(610, 672)">
+        <rect x="0" y="0" width="105" height="18" rx="4" fill="rgba(251,146,60,0.15)"/>
+        <text x="52" y="12" text-anchor="middle" fill="#FDBA74" font-size="7">📚 Educação Saúde</text>
+      </g>
+      <g transform="translate(610, 694)">
+        <rect x="0" y="0" width="105" height="18" rx="4" fill="rgba(251,146,60,0.15)"/>
+        <text x="52" y="12" text-anchor="middle" fill="#FDBA74" font-size="7">💊 Farmácia Online</text>
+      </g>
+      <g transform="translate(610, 716)">
+        <rect x="0" y="0" width="105" height="18" rx="4" fill="rgba(251,146,60,0.15)"/>
+        <text x="52" y="12" text-anchor="middle" fill="#FDBA74" font-size="7">🩺 Doenças Crónicas</text>
+      </g>
+      
+      <!-- Hospital Node -->
+      <g transform="translate(900, 780)">
+        <!-- Hospital Icon - Building with cross -->
+        <svg x="-28" y="-55" width="56" height="56" viewBox="0 0 24 24" fill="none">
+          <rect x="4" y="6" width="16" height="14" rx="2" fill="url(#gradHospital)"/>
+          <rect x="10" y="2" width="4" height="6" fill="url(#gradHospital)"/>
+          <rect x="11" y="10" width="2" height="6" fill="#1E293B"/>
+          <rect x="9" y="12" width="6" height="2" fill="#1E293B"/>
+        </svg>
+        <text y="18" text-anchor="middle" fill="#F472B6" font-size="12" font-weight="600">Hospitais</text>
+        <text y="32" text-anchor="middle" fill="#94A3B8" font-size="8">10M+ Estabelecimentos</text>
+      </g>
+      
+      <!-- Hospital Features -->
+      <g transform="translate(795, 660)">
+        <rect x="0" y="0" width="100" height="18" rx="4" fill="rgba(244,114,182,0.15)"/>
+        <text x="50" y="12" text-anchor="middle" fill="#F9A8D4" font-size="7">🏥 Gestão Admissões</text>
+      </g>
+      <g transform="translate(795, 682)">
+        <rect x="0" y="0" width="100" height="18" rx="4" fill="rgba(244,114,182,0.15)"/>
+        <text x="50" y="12" text-anchor="middle" fill="#F9A8D4" font-size="7">🛏️ Gestão de Camas</text>
+      </g>
+      <g transform="translate(795, 704)">
+        <rect x="0" y="0" width="100" height="18" rx="4" fill="rgba(244,114,182,0.15)"/>
+        <text x="50" y="12" text-anchor="middle" fill="#F9A8D4" font-size="7">👥 Gestão Equipas</text>
+      </g>
+      <g transform="translate(905, 660)">
+        <rect x="0" y="0" width="100" height="18" rx="4" fill="rgba(244,114,182,0.15)"/>
+        <text x="50" y="12" text-anchor="middle" fill="#F9A8D4" font-size="7">📊 Relatórios</text>
+      </g>
+      <g transform="translate(905, 682)">
+        <rect x="0" y="0" width="100" height="18" rx="4" fill="rgba(244,114,182,0.15)"/>
+        <text x="50" y="12" text-anchor="middle" fill="#F9A8D4" font-size="7">🚑 Ambulâncias</text>
+      </g>
+      <g transform="translate(905, 704)">
+        <rect x="0" y="0" width="100" height="18" rx="4" fill="rgba(244,114,182,0.15)"/>
+        <text x="50" y="12" text-anchor="middle" fill="#F9A8D4" font-size="7">💰 Financeiro</text>
+      </g>
+      
+      <!-- Doctor Node -->
+      <g transform="translate(1250, 780)">
+        <!-- Doctor Icon - Person with stethoscope (FIXED - no white) -->
+        <svg x="-28" y="-55" width="56" height="56" viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="7" r="4" fill="url(#gradDoctor)"/>
+          <path d="M4 20c0-4 4-6 8-6s8 2 8 6" fill="url(#gradDoctor)"/>
+          <circle cx="17" cy="14" r="2" stroke="#1E293B" stroke-width="1.5" fill="none"/>
+          <path d="M17 12v-1" stroke="#1E293B" stroke-width="1.5"/>
+          <path d="M15 10c0-1.5 1-3 3-3" stroke="#1E293B" stroke-width="1.5" fill="none"/>
+        </svg>
+        <text y="18" text-anchor="middle" fill="#60A5FA" font-size="12" font-weight="600">Médicos</text>
+        <text y="32" text-anchor="middle" fill="#94A3B8" font-size="8">50M+ Profissionais</text>
+      </g>
+      
+      <!-- Doctor Features - EXPANDED -->
+      <g transform="translate(1085, 650)">
+        <rect x="0" y="0" width="105" height="18" rx="4" fill="rgba(96,165,250,0.15)"/>
+        <text x="52" y="12" text-anchor="middle" fill="#93C5FD" font-size="7">📅 Gestão Agenda</text>
+      </g>
+      <g transform="translate(1085, 672)">
+        <rect x="0" y="0" width="105" height="18" rx="4" fill="rgba(96,165,250,0.15)"/>
+        <text x="52" y="12" text-anchor="middle" fill="#93C5FD" font-size="7">💊 Prescrever</text>
+      </g>
+      <g transform="translate(1085, 694)">
+        <rect x="0" y="0" width="105" height="18" rx="4" fill="rgba(96,165,250,0.15)"/>
+        <text x="52" y="12" text-anchor="middle" fill="#93C5FD" font-size="7">📋 Ver Pacientes</text>
+      </g>
+      <g transform="translate(1085, 716)">
+        <rect x="0" y="0" width="105" height="18" rx="4" fill="rgba(96,165,250,0.15)"/>
+        <text x="52" y="12" text-anchor="middle" fill="#93C5FD" font-size="7">💬 Teleconsultas</text>
+      </g>
+      <g transform="translate(1200, 650)">
+        <rect x="0" y="0" width="105" height="18" rx="4" fill="rgba(96,165,250,0.15)"/>
+        <text x="52" y="12" text-anchor="middle" fill="#93C5FD" font-size="7">📨 Mensagens</text>
+      </g>
+      <g transform="translate(1200, 672)">
+        <rect x="0" y="0" width="105" height="18" rx="4" fill="rgba(96,165,250,0.15)"/>
+        <text x="52" y="12" text-anchor="middle" fill="#93C5FD" font-size="7">🧪 Pedir Exames</text>
+      </g>
+      <g transform="translate(1200, 694)">
+        <rect x="0" y="0" width="105" height="18" rx="4" fill="rgba(96,165,250,0.15)"/>
+        <text x="52" y="12" text-anchor="middle" fill="#93C5FD" font-size="7">📋 Ver Resultados</text>
+      </g>
+      <g transform="translate(1200, 716)">
+        <rect x="0" y="0" width="105" height="18" rx="4" fill="rgba(96,165,250,0.15)"/>
+        <text x="52" y="12" text-anchor="middle" fill="#93C5FD" font-size="7">🔄 Referências</text>
+      </g>
+      <g transform="translate(1315, 650)">
+        <rect x="0" y="0" width="105" height="18" rx="4" fill="rgba(96,165,250,0.15)"/>
+        <text x="52" y="12" text-anchor="middle" fill="#93C5FD" font-size="7">💰 Ganhos</text>
+      </g>
+      <g transform="translate(1315, 672)">
+        <rect x="0" y="0" width="105" height="18" rx="4" fill="rgba(96,165,250,0.15)"/>
+        <text x="52" y="12" text-anchor="middle" fill="#93C5FD" font-size="7">🔄 Refil Prescrições</text>
+      </g>
+      <g transform="translate(1315, 694)">
+        <rect x="0" y="0" width="105" height="18" rx="4" fill="rgba(96,165,250,0.15)"/>
+        <text x="52" y="12" text-anchor="middle" fill="#93C5FD" font-size="7">📊 Histórico Paciente</text>
+      </g>
+      <g transform="translate(1315, 716)">
+        <rect x="0" y="0" width="105" height="18" rx="4" fill="rgba(96,165,250,0.15)"/>
+        <text x="52" y="12" text-anchor="middle" fill="#93C5FD" font-size="7">👤 Perfil Profissional</text>
+      </g>
+      
+      <!-- ==================== DATA FLOW INDICATORS ==================== -->
+      <circle cx="900" cy="330" r="4" fill="#0EA5E9" class="connection-flow"/>
+      <circle cx="550" cy="260" r="3" fill="#10B981" class="connection-flow" style="animation-delay: 0.5s"/>
+      <circle cx="1250" cy="260" r="3" fill="#8B5CF6" class="connection-flow" style="animation-delay: 1s"/>
+      <circle cx="630" cy="480" r="3" fill="#EC4899" class="connection-flow" style="animation-delay: 1.5s"/>
+      <circle cx="1170" cy="480" r="3" fill="#EC4899" class="connection-flow" style="animation-delay: 2s"/>
+      
+    </svg>
+    
+    <div class="legend">
+      <div class="legend-item">
+        <div class="legend-dot" style="background: #0EA5E9;"></div>
+        <span>Plataforma Central</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background: #10B981;"></div>
+        <span>Rede de Farmácias</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background: #8B5CF6;"></div>
+        <span>Rede de Laboratórios</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background: #FB923C;"></div>
+        <span>Pacientes</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background: #F472B6;"></div>
+        <span>Hospitais</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background: #60A5FA;"></div>
+        <span>Médicos</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background: #EC4899;"></div>
+        <span>Backend</span>
+      </div>
+    </div>
+    
+    <div class="powered-by">Desenvolvido por <span>TecnoloVa</span></div>
+  </div>
+</body>
+</html>
